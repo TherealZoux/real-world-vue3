@@ -9,10 +9,12 @@ const props = defineProps({
 })
 
 const event = ref(null)
-
+const date = new Date()
+let year = date.getUTCFullYear()
 onMounted(() => {
   EventService.getEvent(props.id)
     .then((response) => {
+      response.data.date = `January 28, ${year}`
       event.value = response.data
     })
     .catch((error) => {
