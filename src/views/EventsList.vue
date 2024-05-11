@@ -3,10 +3,15 @@ import EventCard from '@/components/EventCard.vue'
 import EventSerevice from '@/services/EventService.js'
 import { onMounted, ref } from 'vue'
 const events = ref(0)
+const date = new Date()
+let year = date.getUTCFullYear()
 
 onMounted(() => {
   EventSerevice.getEvents()
     .then((response) => {
+      response.data[0].date = `January 28, ${year}`
+      response.data[1].date = `March 14, ${year}`
+      response.data[2].date = `July 22, ${year}`
       events.value = response.data
     })
     .catch((error) => {
